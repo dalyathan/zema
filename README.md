@@ -1,7 +1,5 @@
 # Zema Multimedia Developer Position Project
 
-A new Flutter project.
-
 ## Required  Implementations
 
 This project is an implementation of this [design](!https://www.figma.com/file/XNLG9Xi4bmVXIMI2d4zsyy/Zema-Multimedia-flutter-test-design?node-id=1-303&t=58qQv4XY3PFm6t82-0).
