@@ -18,7 +18,7 @@ The following requirements have been satisfied:
 | ------------- | ------------- |
 | ![alt text](./images/Screenshot_20230312-212230.jpg)  | ![alt text](./images/Screenshot_20230312-212332.jpg)  |
 - Allowing the tracks to be played.
-
+|   |  |
 | ------------- | ------------- |
 | ![alt text](./images/Screenshot_20230312-212247.jpg)  | ![alt text](./images/Screenshot_20230312-212306.jpg)  |
 
