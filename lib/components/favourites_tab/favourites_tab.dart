@@ -11,7 +11,6 @@ class FavouritesTabBarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trProvider = Provider.of<TracksProvider>(context);
     return Consumer<FavouritesProvider>(
         builder: (_, provider, __) => LazilyLoadingListView(
             size: size,

@@ -21,7 +21,6 @@ class NetworkService {
       final jsondedData = jsonDecode(response.body);
       final dataList = (jsondedData['results'] as List<dynamic>);
       if (dataList.isNotEmpty) {
-        print('list is bak $url ${dataList.length}');
         return NextItemsList<T>(
             List<T>.from(
                 dataList.map((e) => SuperModel.fromJson<T>(e)).toList()),
@@ -38,7 +37,6 @@ class NetworkService {
         },
         body: jsonEncode(
             <String, String>{'user_FUI': userFUI, 'track_id': '$trackId'}));
-    print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 201) {
       return jsonDecode(response.body);
     }

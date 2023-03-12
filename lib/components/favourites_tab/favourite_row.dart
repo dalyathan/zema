@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:zema/constants.dart';
 import 'package:zema/models/fav_track.dart';
 import 'package:zema/models/favourites.dart';
-import 'package:zema/models/tracks.dart';
 
 import '../../providers/favourites.dart';
 import '../common/music_player_dialog.dart';

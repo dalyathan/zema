@@ -37,7 +37,6 @@ class LazyLoadingVerticalListView extends StatelessWidget {
                           maxCrossAxisExtent: 200,
                         ),
                         itemBuilder: (BuildContext ctx, index) {
-                          // print('index $index');
                           if (index < data.items.length - 1) {
                             return content.elementAt(index);
                           } else {

@@ -10,14 +10,12 @@ class FavouritesProvider extends SuperProvider<Favourites> {
   @override
   Future<void> getNextItems() async {
     await super.getNextItems();
-    // items.forEach((element) => {print(element.userFUI)});
     items = items.where((element) => element.userFUI == userFUI).toList();
     notifyListeners();
   }
 
   Future<bool> add(Tracks newFav) async {
     final serverReponse = await networkService.addFavourite(newFav.id, userFUI);
-    print(serverReponse);
     if (serverReponse['id']) {
       items = [
         ...items,
@@ -40,7 +38,6 @@ class FavouritesProvider extends SuperProvider<Favourites> {
 
   Future<bool> remove(Tracks removeMe) async {
     final fav = findTrackInFavList(removeMe);
-    print(fav);
     if (fav != null) {
       final serverReponse =
           await networkService.deleteFavourite(fav.id, userFUI);
