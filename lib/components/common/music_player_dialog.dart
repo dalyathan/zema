@@ -3,14 +3,14 @@ import 'package:just_audio/just_audio.dart';
 import 'package:zema/components/common/musci_description.dart';
 import 'package:zema/components/common/pause_play_icon.dart';
 import 'package:zema/components/common/playing_status.dart';
-import 'package:zema/model/tracks.dart';
+import 'package:zema/models/fav_track.dart';
 
 class AudioPlayerDialog extends StatefulWidget {
   const AudioPlayerDialog({
     super.key,
     required this.track,
   });
-  final Tracks track;
+  final FavTrack track;
 
   @override
   State<AudioPlayerDialog> createState() => _AudioPlayerDialogState();

@@ -12,7 +12,8 @@ void main() {
     ChangeNotifierProvider(create: (_) => AlbumsProvider(ALBUMS_API_URL)),
     ChangeNotifierProvider(create: (_) => TracksProvider(TRACKS_API_URL)),
     ChangeNotifierProvider(create: (_) => ArtistsProvider(ARTISTS_API_URL)),
-    ChangeNotifierProvider(create: (_) => FavouritesProvider()),
+    ChangeNotifierProvider(
+        create: (_) => FavouritesProvider(FAVOURITES_API_URL)),
   ], child: const MyApp()));
 }
 

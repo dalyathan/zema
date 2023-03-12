@@ -1,4 +1,4 @@
-import 'package:zema/model/super.dart';
+import 'package:zema/models/super.dart';
 
 class Albums extends SuperModel {
   final int id;

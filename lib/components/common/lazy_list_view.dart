@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:zema/constants.dart';
 import 'package:zema/providers/super.dart';
 
-class ExploreRow extends StatelessWidget {
-  const ExploreRow(
+class LazilyLoadingListView extends StatelessWidget {
+  const LazilyLoadingListView(
       {super.key,
       required this.size,
       required this.content,
       required this.header,
-      required this.provider});
+      required this.provider,
+      required this.scrollDirection});
   final Size size;
-  final List<Widget> content;
+  final Iterable<Widget> content;
   final String header;
+  final Axis scrollDirection;
   final SuperProvider provider;
 
   @override
@@ -26,13 +28,13 @@ class ExploreRow extends StatelessWidget {
             header,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
-          const Spacer(),
+          // const Spacer(),
           SizedBox(
             height: size.height * 0.8,
             width: size.width,
             child: NotificationListener<ScrollNotification>(
                 child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: scrollDirection,
                     separatorBuilder: (context, index) => const SizedBox(
                           width: 10,
                         ),
@@ -40,7 +42,7 @@ class ExploreRow extends StatelessWidget {
                         provider.items.length + (provider.next != null ? 1 : 0),
                     itemBuilder: (context, index) {
                       if (index < provider.items.length - 1) {
-                        return content[index];
+                        return content.elementAt(index);
                       } else {
                         if (!provider.isLoading && provider.next != null) {
                           provider.getNextItems();

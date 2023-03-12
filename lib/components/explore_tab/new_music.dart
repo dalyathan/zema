@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zema/components/common/music_player_dialog.dart';
 import 'package:zema/constants.dart';
+import 'package:zema/models/fav_track.dart';
 import 'package:zema/providers/favourites.dart';
 import 'package:zema/providers/tracks.dart';
 import '../common/album.dart';
-import 'explore_row.dart';
+import '../common/lazy_list_view.dart';
 
 class NewMusic extends StatelessWidget {
   const NewMusic({super.key, required this.size});
@@ -15,23 +16,9 @@ class NewMusic extends StatelessWidget {
   Widget build(BuildContext context) {
     var albumWidth = size.width * 0.275;
     var albumHeight = size.height * 0.8;
-    final favProvider = Provider.of<FavouritesProvider>(context);
+    final favProvider = Provider.of<FavouritesProvider>(context, listen: true);
     return Consumer<TracksProvider>(
-        builder: (_, data, __) =>
-            // data.items.isEmpty
-            //     ? SizedBox(
-            //         width: size.width,
-            //         height: size.height,
-            //         child: const Center(
-            //           child: SizedBox.square(
-            //               dimension: 32,
-            //               child: CircularProgressIndicator(
-            //                 color: pinkLike,
-            //               )),
-            //         ),
-            //       )
-            //     :
-            ExploreRow(
+        builder: (_, data, __) => LazilyLoadingListView(
               size: size,
               content: data.items.map<Album>((e) {
                 final isItFav = favProvider.isFav(e);
@@ -46,9 +33,25 @@ class NewMusic extends StatelessWidget {
                     ),
                     onTap: () {
                       if (isItFav) {
-                        favProvider.remove(e);
+                        favProvider.remove(e).then((value) {
+                          if (value) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                successSnackBar('Successfully removed'));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                errorSnackBar('Unable to  remove'));
+                          }
+                        });
                       } else {
-                        favProvider.add(e);
+                        favProvider.add(e).then((value) {
+                          if (value) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                successSnackBar('Successfully added'));
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(errorSnackBar('Unable to  add'));
+                          }
+                        });
                       }
                     },
                   ),
@@ -57,14 +60,33 @@ class NewMusic extends StatelessWidget {
                     showModalBottomSheet<void>(
                       context: context,
                       builder: (BuildContext context) {
-                        return AudioPlayerDialog(track: e);
+                        return AudioPlayerDialog(track: FavTrack.fromTrack(e));
                       },
                     );
                   },
                 );
-              }).toList(),
+              }),
               header: 'New Music',
               provider: data,
+              scrollDirection: Axis.horizontal,
             ));
+  }
+
+  SnackBar snackBar(String messae, Color color) {
+    return SnackBar(
+      content: Text(
+        messae,
+      ),
+      backgroundColor: color,
+      duration: const Duration(seconds: 2),
+    );
+  }
+
+  SnackBar successSnackBar(String messae) {
+    return snackBar(messae, Colors.green);
+  }
+
+  SnackBar errorSnackBar(String messae) {
+    return snackBar(messae, Colors.red);
   }
 }

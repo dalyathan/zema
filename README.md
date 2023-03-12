@@ -1,16 +1,19 @@
-# zema
+# Zema Multimedia Developer Position Project
 
 A new Flutter project.
 
-## Getting Started
+## Required  Implementations
 
-This project is a starting point for a Flutter application.
+This project is an implementation of this [design](!https://www.figma.com/file/XNLG9Xi4bmVXIMI2d4zsyy/Zema-Multimedia-flutter-test-design?node-id=1-303&t=58qQv4XY3PFm6t82-0).
+The following requirements have been satisfied:
+- It is implemented using [Flutter/dart](!https://flutter.dev/)
+- The state management used is [Provider](!https://pub.dev/packages/provider)
+- All data is fetched from the provided API [Routes](!https://exam.calmgrass-743c6f7f.francecentral.azurecontainerapps.io/swagger)
+- Tracks can be added to a favorite list and removed from the favorite list.
+- A version controll system is used for submitting.
+## Extra  Implementations
+- Lazily loaded albums & favorites page 
+- Allowing the tracks to be played.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
