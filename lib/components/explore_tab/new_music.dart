@@ -59,6 +59,8 @@ class NewMusic extends StatelessWidget {
                   onPlay: () async {
                     showModalBottomSheet<void>(
                       context: context,
+                      // isScrollControlled: false,
+                      enableDrag: false,
                       builder: (BuildContext context) {
                         return AudioPlayerDialog(track: FavTrack.fromTrack(e));
                       },
