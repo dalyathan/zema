@@ -40,10 +40,12 @@ class _PlayingStatusState extends State<PlayingStatus> {
                     widget.player.duration!.inMicroseconds
                 : 0;
           }
-          return SizedBox(
-            width: widget.size.width * 0.8,
-            height: widget.size.height * 0.8,
+          return Container(
+            width: widget.size.width,
+            height: widget.size.height,
+            color: Colors.amber,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Spacer(
                   flex: 3,
@@ -51,12 +53,15 @@ class _PlayingStatusState extends State<PlayingStatus> {
                 Stack(
                   alignment: AlignmentDirectional.centerStart,
                   children: [
-                    Center(
-                      child: LinearProgressIndicator(
-                        value: percentIndicator,
-                        semanticsLabel: 'Linear progress indicator',
-                        color: pinkLike,
-                        backgroundColor: pinkLike.withOpacity(0.3),
+                    SizedBox(
+                      width: barWidth,
+                      child: Center(
+                        child: LinearProgressIndicator(
+                          value: percentIndicator,
+                          semanticsLabel: 'Linear progress indicator',
+                          color: pinkLike,
+                          backgroundColor: pinkLike.withOpacity(0.3),
+                        ),
                       ),
                     ),
                     Padding(

@@ -32,45 +32,35 @@ class LazilyLoadingListView extends StatelessWidget {
           SizedBox(
             height: size.height * 0.8,
             width: size.width,
-            child: NotificationListener<ScrollNotification>(
-                child: ListView.separated(
-                    scrollDirection: scrollDirection,
-                    separatorBuilder: (context, index) => const SizedBox(
-                          width: 10,
-                        ),
-                    itemCount:
-                        provider.items.length + (provider.next != null ? 1 : 0),
-                    itemBuilder: (context, index) {
-                      if (index < provider.items.length - 1) {
-                        return content.elementAt(index);
-                      } else {
-                        if (!provider.isLoading && provider.next != null) {
-                          provider.getNextItems();
-                          return provider.next != null
-                              ? SizedBox(
-                                  width: provider.items.isNotEmpty
-                                      ? 32
-                                      : size.width,
-                                  child: const Center(
-                                    child: CircularProgressIndicator(
-                                      color: pinkLike,
-                                    ),
-                                  ),
-                                )
-                              : null;
-                        }
-                        return null;
-                      }
-                    } // ListView(children: [
+            child: ListView.separated(
+                scrollDirection: scrollDirection,
+                separatorBuilder: (context, index) => const SizedBox(
+                      width: 10,
                     ),
-                onNotification: (ScrollNotification scrollInfo) {
-                  if ((scrollInfo.metrics.pixels >
-                          scrollInfo.metrics.maxScrollExtent * 0.8) &&
-                      !provider.isLoading) {
-                    provider.getNextItems();
+                itemCount:
+                    provider.items.length + (provider.next != null ? 1 : 0),
+                itemBuilder: (context, index) {
+                  if (index < provider.items.length - 1) {
+                    return content.elementAt(index);
+                  } else {
+                    if (!provider.isLoading && provider.next != null) {
+                      provider.getNextItems();
+                      return provider.next != null
+                          ? SizedBox(
+                              width:
+                                  provider.items.isNotEmpty ? 32 : size.width,
+                              child: const Center(
+                                child: CircularProgressIndicator(
+                                  color: pinkLike,
+                                ),
+                              ),
+                            )
+                          : null;
+                    }
+                    return null;
                   }
-                  return true;
-                }),
+                } // ListView(children: [
+                ),
           )
         ],
       ),
